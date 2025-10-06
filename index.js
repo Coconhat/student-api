@@ -52,7 +52,16 @@ async function getStudentInfo(id) {
       }),
     });
 
-    const data = await response.json();
+    const responseText = await response.text();
+    console.log("Raw response from DLSL API:", responseText);
+
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      console.error("Response was not JSON.");
+      throw new Error("Invalid response from DLSL API");
+    }
     return data;
   } catch (error) {
     console.error("Error fetching student info:", error);
