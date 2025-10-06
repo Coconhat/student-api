@@ -44,7 +44,7 @@ async function getStudentInfo(id) {
       },
       body: new URLSearchParams({
         action: "registration_tapregister",
-        regKey: regKey,
+        regkey: regKey,
         card_tag: id,
       }),
     });
