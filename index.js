@@ -34,6 +34,8 @@ function isValid(object) {
 async function getStudentInfo(id) {
   const api = "https://portal.dlsl.edu.ph/registration/event/helper.php";
 
+  const regKey = process.env.REG_KEY;
+
   try {
     const response = await fetch(api, {
       method: "POST",
@@ -42,6 +44,7 @@ async function getStudentInfo(id) {
       },
       body: new URLSearchParams({
         action: "registration_tapregister",
+        regKey: regKey,
         card_tag: id,
       }),
     });
