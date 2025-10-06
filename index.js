@@ -33,10 +33,10 @@ function isValid(object) {
 }
 
 async function getStudentInfo(id) {
-    const regKey = process.env.REG_KEY;
-    if (!regKey) {
-        throw new Error('REG_KEY environment variable is not set');
-    }
+  const regKey = process.env.REG_KEY;
+  if (!regKey) {
+    throw new Error("REG_KEY environment variable is not set");
+  }
   const api = "https://portal.dlsl.edu.ph/registration/event/helper.php";
 
   try {
@@ -47,7 +47,7 @@ async function getStudentInfo(id) {
       },
       body: new URLSearchParams({
         action: "registration_tapregister",
-        regkey: regkey,
+        regkey: regKey,
         card_tag: id,
       }),
     });
