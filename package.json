@@ -18,14 +18,6 @@
     "express": "^4.21.2",
     "node-fetch": "^3.3.2"
   },
-
-  {
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "type": "module"
-}
   "devDependencies": {
     "nodemon": "^2.0.22"
   }
