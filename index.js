@@ -33,10 +33,6 @@ function isValid(object) {
 }
 
 async function getStudentInfo(id) {
-  const regKey = process.env.REG_KEY;
-  if (!regKey) {
-    throw new Error("REG_KEY environment variable is not set");
-  }
   const api = "https://portal.dlsl.edu.ph/registration/event/helper.php";
 
   try {
@@ -47,21 +43,11 @@ async function getStudentInfo(id) {
       },
       body: new URLSearchParams({
         action: "registration_tapregister",
-        regkey: regKey,
         card_tag: id,
       }),
     });
 
-    const responseText = await response.text();
-    console.log("Raw response from DLSL API:", responseText);
-
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch {
-      console.error("Response was not JSON.");
-      throw new Error("Invalid response from DLSL API");
-    }
+    const data = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching student info:", error);
