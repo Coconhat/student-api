@@ -16,8 +16,8 @@ app.use(
   })
 );
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Helper function to validate student data
 function isValid(object) {
@@ -26,7 +26,6 @@ function isValid(object) {
   const email = object.email_address;
   if (!email) return false;
 
-  // empty email?
   if (email.length === 0) return false;
 
   return true;
