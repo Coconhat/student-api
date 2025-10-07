@@ -2,11 +2,14 @@ import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import https from "https";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(
   cors({
@@ -37,6 +40,8 @@ async function getStudentInfo(id) {
   const regKey = process.env.REG_KEY;
 
   try {
+    const agent = new https.Agent({ rejectUnauthorized: false });
+
     const response = await fetch(api, {
       method: "POST",
       headers: {
@@ -47,6 +52,7 @@ async function getStudentInfo(id) {
         regkey: regKey,
         card_tag: id,
       }),
+      agent,
     });
 
     const data = await response.json();
